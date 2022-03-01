@@ -1,0 +1,18 @@
+# STAGE 1
+FROM node:14.17.3-alpine AS builder
+USER node
+WORKDIR /app
+COPY package*.json ./
+RUN npm i
+COPY --chown=node:node . .
+RUN npm run build
+
+# STAGE 2
+FROM node:14.17.3-alpine
+USER node
+WORKDIR /app
+COPY package*.json ./
+RUN npm i --prod
+COPY --from=builder /app/build ./build
+
+CMD npm start
