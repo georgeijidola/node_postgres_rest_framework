@@ -2,7 +2,7 @@ import { createClient } from "redis"
 import config from "../config/Index"
 import Logger from "./Logger"
 
-const { user, port, password, host } = config.redis
+const { port, password, host } = config.redis
 
 const redisClient = async () => {
   const client = createClient({

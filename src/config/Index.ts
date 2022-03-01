@@ -33,8 +33,6 @@ try {
     "REDIS_MAXMEMORY",
     "REDIS_MAXMEMORY_POLICY",
     "REDIS_PORT",
-    "REDIS_USER",
-    "REDIS_USER_PASSWORD",
 
     // RabbitMQ
     "RABBITMQ_PORT",
@@ -126,10 +124,6 @@ const config = {
     port: process.env.REDIS_PORT!,
     password: process.env.REDIS_PASSWORD!,
     host: process.env.REDIS_HOST!,
-    user: {
-      name: process.env.REDIS_USER!,
-      password: process.env.REDIS_USER_PASSWORD!,
-    },
   },
 
   /**
