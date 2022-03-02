@@ -2,6 +2,7 @@ import { Sequelize } from "sequelize"
 import config from "../config/Index"
 
 const { name, user, password, host, log, maxPoolConnections } = config.database
+
 const database = new Sequelize(name, user, password, {
   host,
   dialect: "postgres",

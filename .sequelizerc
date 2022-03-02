@@ -1,7 +1,0 @@
-module.exports = {
-  env: ".env",
-  config: "src/config/config.js",
-  "models-path": "src/models",
-  "seeders-path": "src/db/seed",
-  "migrations-path": "src/db/migrations",
-}
