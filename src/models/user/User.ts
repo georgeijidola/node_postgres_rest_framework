@@ -1,6 +1,6 @@
 /** @format */
 
-import { STRING, INTEGER, Model, DATE, UUID } from "sequelize"
+import { STRING, Model, DATE, UUIDV4, CHAR } from "sequelize"
 import Password from "../../helpers/Password"
 import database from "../../loaders/DBConnection"
 
@@ -15,9 +15,7 @@ export class User extends Model {
 User.init(
   {
     id: {
-      // TODO: Look into this UUID and the probability of not being unique
-      type: UUID,
-      autoIncrement: true,
+      type: UUIDV4,
       primaryKey: true,
     },
 
@@ -54,7 +52,7 @@ User.init(
     },
 
     role: {
-      type: STRING,
+      type: CHAR(1),
       defaultValue: "u",
       allowNull: false,
       validate: {
