@@ -23,7 +23,7 @@ const createDatabase = async () => {
     if (result.rowCount === 0) {
       Logger.info(`Creating database ${name}`)
 
-      await pool.query(`CREATE DATABASE ${name}`)
+      await pool.query(`CREATE DATABASE ${name};`)
     } else {
       Logger.info("Database already exists.")
     }

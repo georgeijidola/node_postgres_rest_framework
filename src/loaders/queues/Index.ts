@@ -4,13 +4,17 @@ import initializeQueues from "./InitializeQueues"
 import processQueues from "./ProcessQueues"
 
 const queues = async () => {
-  const { channel, connection } = await connectRabbitMQ()
+  try {
+    const { channel, connection } = await connectRabbitMQ()
 
-  Logger.info("RabbitMQ connected.")
+    Logger.info("RabbitMQ connected.")
 
-  await initializeQueues(channel)
+    await initializeQueues(channel)
 
-  await processQueues(connection)
+    await processQueues(connection)
+  } catch (error) {
+    Logger.error(error)
+  }
 }
 
 export default queues

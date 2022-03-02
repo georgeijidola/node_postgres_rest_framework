@@ -1,3 +1,4 @@
+import Logger from "../../loaders/Logger"
 import connectRabbitMQ from "./ConnectRabbitMQ"
 
 const PushToQueue = async ({
@@ -7,11 +8,17 @@ const PushToQueue = async ({
   queue: string
   data: object
 }) => {
-  const { channel } = await connectRabbitMQ()
+  try {
+    const { channel } = await connectRabbitMQ()
 
-  channel.sendToQueue(queue, Buffer.from(data.toString()), { persistent: true })
+    channel.sendToQueue(queue, Buffer.from(data.toString()), {
+      persistent: true,
+    })
 
-  await channel.close()
+    await channel.close()
+  } catch (error) {
+    Logger.error(error)
+  }
 }
 
 export default PushToQueue

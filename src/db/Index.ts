@@ -17,7 +17,7 @@ const migrate = async (path: string) => {
 
 const migrator = new Umzug({
   migrations: {
-    glob: "migrations/*.up.sql",
+    glob: "src/db/migrations/*.up.sql",
     resolve: ({ name, path }) => ({
       name,
       up: async () => await migrate(path!),
@@ -35,7 +35,7 @@ const migrator = new Umzug({
 
 const seeder = new Umzug({
   migrations: {
-    glob: "seeds/*.up.sql",
+    glob: "src/db/seeds/*.up.sql",
     resolve: ({ name, path }) => ({
       name,
       up: async () => await migrate(path!),
@@ -80,4 +80,4 @@ const resolveCommand = async () => {
   }
 }
 
-export default resolveCommand
+export default resolveCommand()

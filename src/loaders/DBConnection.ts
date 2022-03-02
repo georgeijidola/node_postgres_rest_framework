@@ -1,12 +1,12 @@
 import { Sequelize } from "sequelize"
 import config from "../config/Index"
 
-const { name, user, password, host, log, maxPoolConnections } = config.database
+const { name, user, password, host, maxPoolConnections } = config.database
 
 const database = new Sequelize(name, user, password, {
   host,
   dialect: "postgres",
-  logging: log,
+  logging: false,
   pool: {
     max: maxPoolConnections,
     min: 0,
