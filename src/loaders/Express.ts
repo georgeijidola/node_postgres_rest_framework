@@ -11,9 +11,6 @@ import errorHandler from "../managers/error/ErrorHandler"
 import { sentryTracker, sentryTrackerErrorHandler } from "./SentryTracker"
 import apiCheck from "../api/middlewares/APICheck"
 import preventSQLInjection from "../api/middlewares/PreventSQLInjection"
-import redisClient from "./RedisClient"
-import RedisClientHandler from "../helpers/RedisClientHandler"
-import { RedisClientType } from "redis"
 import queues from "./queues/Index"
 
 const expressLoader = async () => {
@@ -52,17 +49,10 @@ const expressLoader = async () => {
   // API Key check
   app.use(apiCheck)
 
-  // Instantiate Redis
-  const redisService = await redisClient()
-  const redisClientService = new RedisClientHandler(
-    redisService as RedisClientType
-  )
-  app.set("redisClientService", redisClientService)
-
   await queues()
 
   app.get("/", (req: Request, res: Response): void => {
-    res.status(200).json("Welcome to NodeJS, Postgres, and Rest Framework!")
+    res.status(200).send("Welcome to NodeJS, Postgres, and Rest Framework!")
   })
 
   /**

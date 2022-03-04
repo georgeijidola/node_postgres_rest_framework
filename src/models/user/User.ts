@@ -5,17 +5,18 @@ import Password from "../../helpers/Password"
 import database from "../../loaders/DBConnection"
 
 export class User extends Model {
-  public id!: string
-  public email!: string
-  public password?: string
-  public role!: string
-  public emailVerifiedAt?: Date
+  declare id: string
+  declare email: string
+  declare password?: string
+  declare role: string
+  declare emailVerifiedAt: Date
 }
 
 User.init(
   {
     id: {
       type: UUIDV4,
+      defaultValue: UUIDV4,
       primaryKey: true,
     },
 
@@ -29,7 +30,7 @@ User.init(
         },
       },
       set(value) {
-        this.setDataValue("email", (value as string).trim().toLowerCase())
+        this.setDataValue("email", (value as string)?.trim().toLowerCase())
       },
     },
 
@@ -45,9 +46,6 @@ User.init(
           args: [6, 15],
           msg: "Password must be at least between 6 - 15 characters.",
         },
-      },
-      set(value) {
-        this.setDataValue("password", Password.toHash(value as string))
       },
     },
 
@@ -68,6 +66,7 @@ User.init(
   {
     sequelize: database,
     paranoid: true,
+    tableName: "users",
     indexes: [
       {
         name: "email_index",
@@ -77,3 +76,8 @@ User.init(
     ],
   }
 )
+
+User.beforeCreate(async (user, options) => {
+  const hashedPassword = Password.toHash(user.password!)
+  user.password = hashedPassword
+})

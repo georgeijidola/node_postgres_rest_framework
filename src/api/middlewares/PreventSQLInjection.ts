@@ -1,6 +1,5 @@
 // Logic inspired by: https://github.com/vymarkov/sql-injection/blob/master/lib/index.js
 import { NextFunction, Request, Response } from "express"
-import getRawBody from "raw-body"
 import ErrorResponse from "../../managers/error/ErrorResponse"
 
 const hasSql = (value: string) => {
@@ -36,28 +35,16 @@ const preventSQLInjection = (
     })
   }
 
-  getRawBody(
-    req,
-    {
-      encoding: "utf8",
-    },
-    (err, body) => {
-      if (err) {
-        return next(err)
-      }
+  const body = JSON.stringify(req.body)
 
-      body = JSON.stringify(body)
+  if (hasSql(body) === true) {
+    throw new ErrorResponse({
+      message: "Dirty request!",
+      statusCode: 403,
+    })
+  }
 
-      if (hasSql(body) === true) {
-        throw new ErrorResponse({
-          message: "Dirty request!",
-          statusCode: 403,
-        })
-      }
-
-      next()
-    }
-  )
+  next()
 }
 
 export default preventSQLInjection

@@ -23,25 +23,7 @@ const DecipherToken = async (token?: string) => {
     text: string
   }
 
-  const user = await User.findOne({
-    where: { id: decoded.text },
-    attributes: ["id", "role", "emailVerifiedAt", "email"],
-  })
-
-  if (!user) {
-    throw new ErrorResponse({
-      error: {
-        devMessage: "Invalid token, user with that id doesn't exist.",
-        possibleSolution: "Please, put the right token.",
-
-        errorCode: 400,
-      },
-      statusCode: 401,
-      message: "Unauthorized access, please contact support.",
-    })
-  }
-
-  return user
+  return [decoded.text, token]
 }
 
 export default DecipherToken

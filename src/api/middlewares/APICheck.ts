@@ -6,7 +6,7 @@ import asyncHandler from "./Async"
 
 const apiCheck = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    if (!req.query.pswd) {
+    if (!req.headers.pswd) {
       throw new ErrorResponse({
         error: {
           devMessage: "API key is missing.",
@@ -19,7 +19,7 @@ const apiCheck = asyncHandler(
 
     const hashedPassword = Password.toHash(config.api.key)
 
-    const isMatch = Password.compare(hashedPassword, req.query.pswd as string)
+    const isMatch = Password.compare(hashedPassword, req.headers.pswd as string)
 
     if (!isMatch) {
       throw new ErrorResponse({

@@ -5,7 +5,7 @@ import errorHandler from "../managers/error/ErrorHandler"
 process.env.NODE_ENV = process.env.NODE_ENV || "development"
 
 try {
-  const envFound = dotenv.config()
+  dotenv.config()
 
   // if (envFound.error && "development".includes(process.env.NODE_ENV)) {
   //   // This error should crash whole process
@@ -151,7 +151,7 @@ const config = {
    */
   api: {
     prefix: "/api/v1/",
-    key: process.env.API_KEY as string,
+    key: process.env.API_KEY!,
   },
 
   /**

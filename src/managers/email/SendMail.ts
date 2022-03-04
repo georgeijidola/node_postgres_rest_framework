@@ -20,7 +20,7 @@ const sendNodeMail = async ({
     })
 
     const mailOptions = {
-      from: `'NodeJS, Postgres, and Rest Framework' ${config.sender.email}`,
+      from: `'Framework' ${config.sender.email}`,
       to,
       replyTo: config.sender.email,
       subject,

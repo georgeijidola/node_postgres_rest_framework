@@ -1,5 +1,5 @@
 {
-  "ext": "ts,json",
+  "ext": "ts,json,sql",
   "exec": "ts-node --files src/Cluster.ts",
   "watch": ".",
   "env": {

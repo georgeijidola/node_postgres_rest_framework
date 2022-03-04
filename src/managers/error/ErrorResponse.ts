@@ -2,7 +2,7 @@ import Response from "../../interfaces/Response"
 import ErrorDetails from "./ErrorDetails"
 
 class ErrorResponse extends Error implements Response {
-  message: Response["message"]
+  message
   statusCode: Response["statusCode"]
   error: Response["error"]
   data: Response["data"]

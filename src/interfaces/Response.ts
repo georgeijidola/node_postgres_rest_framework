@@ -3,7 +3,7 @@ import pagination from "./Pagination"
 
 class Response {
   error?: ErrorDetails | boolean
-  message: string
+  message?: string
   statusCode?: number
   data?: object | object[]
   token?: string

@@ -1,5 +1,4 @@
 import winston from "winston"
-import config from "../config/Index"
 
 let transports
 
@@ -15,7 +14,7 @@ if ("test".includes(process.env.NODE_ENV!)) {
 }
 
 const Logger = winston.createLogger({
-  level: config.logs.level,
+  level: process.env.LOG_LEVEL!,
   levels: winston.config.npm.levels,
   format: winston.format.combine(
     winston.format.timestamp({

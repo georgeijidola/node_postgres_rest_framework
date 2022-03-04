@@ -11,7 +11,7 @@ const PushToQueue = async ({
   try {
     const { channel } = await connectRabbitMQ()
 
-    channel.sendToQueue(queue, Buffer.from(data.toString()), {
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify(data)), {
       persistent: true,
     })
 
