@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express"
 import { RedisNamespaces } from "../../../enums/RedisNamespaces"
-import signToken from "../../../helpers/SignToken"
+import signToken from "../../../helpers/auth/SignToken"
 import SuccessResponse from "../../../helpers/SuccessResponse"
 import redisHandler from "../../../managers/redis/Index"
 import SignInService from "../../../services/auth/SignInService"

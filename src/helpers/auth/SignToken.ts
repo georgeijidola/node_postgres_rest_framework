@@ -1,4 +1,4 @@
-import config from "../config/Index"
+import config from "../../config/Index"
 import jwt from "jsonwebtoken"
 
 const signToken = (text: string) =>
